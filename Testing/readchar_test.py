@@ -7,9 +7,9 @@ while(1):
     # Determine what to do based on the key input
 
     # Numbered Keys
-    if(key == "1"):
-        # Do Nothing
-        print("Do Nothing Key");
+    if(key == "1" or key == "9"):
+        # Dive Key
+        print("Sinking");
 
     elif(key == "2"):
         # Down Key
@@ -39,16 +39,12 @@ while(1):
         # Faster Key
         print("Forward Faster");
 
-    elif(key == "9" or key == "1"):
-        # Sinking Key
-        print("Sinking");
-
     # Non-Numbering Keys
     elif(key == "e"):
         # Enable Key
         print("Endabled");
 
-    elif(key == "q"):
-        print("Execution Terminated by 'q'");
+    elif(key == "q" or key == "c" or key == "x" or key == "z"):
+        print("Execution Terminated by '"+key+"'");
         exit();
 
