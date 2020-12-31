@@ -1,4 +1,4 @@
-cp ./rovstream.html ../../mjpg-streamer/mjpg-streamer-experimental/
+cp ./rovstream.html ../../mjpg-streamer/mjpg-streamer-experimental/www/
 
 cd ../..
 cd mjpg-streamer/
