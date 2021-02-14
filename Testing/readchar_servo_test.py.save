@@ -3,7 +3,7 @@ from adafruit_servokit import ServoKit
 
 ENABLED = False;
 
-ud_servo = 3;
+ud_servo = 0;
 ud_throttle_step = 3;
 ud_throttle = 0;
 ud_throttle_max = 170;
@@ -24,37 +24,19 @@ rm_throttle_max = 170;
 tm_throttle_min = 0;
 
 kit = ServoKit(channels=16)
-
 while(1):
-	# Read Keys ------------------------------------------------
-
 	key = readchar.readkey();
-
-	# Non-Kinetic Control Keys ----------------------------------
-
-	if(key == "e"):
-		# Enable Key
-		print("Endabled");
-		ENABLED = True
-
-	elif(key == "d"):
-		#Disable Key
-		print("Disabled");
-		kit.servo[ud_servo].angle = 0;
-		kit.servo[lm_servo].angle = 0;
-		kit.servo[rm_servo].angle = 0;
-		ENABLED = False
-
-	elif(key == "q" or key == "c" or key == "x" or key == "z"):
-		print("Execution Terminated by '"+key+"'");
-		kit.servo[ud_servo].angle = 0;
-		kit.servo[rm_servo].angle = 0;
-		kit.servo[lm_servo].angle = 0;
-		exit()
-
-	# Motor Control Keys -----------------------------------------
-
+	
 	if(ENABLED):
+		# Set the motor speeds
+		kit.servo[ud_servo].angle = ud_throttle
+		lm_throttle = fb_throttle + turn_throttle
+		rm_throttle = fb_throttle - turn_throttle
+		if(lm_throttle >= 0):
+			kit.servo[lm_servo].angle = lm_throttle 
+		if(rm_throttle >= 0):
+			kit.servo[rm_servo].angle = rm_throttle
+
 		# Check the terminal for a key press
 		#key = readchar.readkey();
 		#print(key);
@@ -110,16 +92,11 @@ while(1):
 			if(fb_throttle < fb_throttle_max):
 				fb_throttle += fb_throttle_step
 
-		# Set the motor speeds
-		
-		lm_throttle = fb_throttle + turn_throttle
-		rm_throttle = fb_throttle - turn_throttle
-		if(ud_throttle >= 0):
-			kit.servo[ud_servo].angle = ud_throttle
-		if(lm_throttle >= 0):
-			kit.servo[lm_servo].angle = lm_throttle 
-		if(rm_throttle >= 0):
-			kit.servo[rm_servo].angle = rm_throttle
+	e
 
-
-	
+	elif(key == "q" or key == "c" or key == "x" or key == "z"):
+		print("Execution Terminated by '"+key+"'");
+		kit.servo[ud_servo].angle = 0;
+		kit.servo[rm_servo].angle = 0;
+		kit.servo[lm_servo].angle = 0;
+		exit();
