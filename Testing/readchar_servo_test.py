@@ -4,7 +4,7 @@ from adafruit_servokit import ServoKit
 ENABLED = False;
 
 ud_servo = 3;
-ud_throttle_step = 3;
+ud_throttle_step = 1;
 ud_throttle = 0;
 ud_throttle_max = 170;
 ud_throttle_min = 0;
@@ -34,7 +34,7 @@ while(1):
 
 	if(key == "e"):
 		# Enable Key
-		print("Endabled");
+		print("Enabled");
 		ENABLED = True
 
 	elif(key == "d"):
