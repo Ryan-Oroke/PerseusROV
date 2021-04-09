@@ -1,5 +1,10 @@
 import readchar
 from adafruit_servokit import ServoKit
+import simple_pid
+import time
+from mpu9250_jmdev.registers import *
+from mpu9250_jmdev.mpu_9250 import MPU9250
+import math
 
 ENABLED = False;
 
@@ -25,11 +30,23 @@ tm_throttle_min = 0;
 
 kit = ServoKit(channels=16)
 
+#Mag stuff
+mpu = MPU9250(
+    address_ak=AK8963_ADDRESS, 
+    address_mpu_master=MPU9050_ADDRESS_68, # In 0x68 Address
+    address_mpu_slave=None, 
+    bus=1,
+    gfs=GFS_1000, 
+    afs=AFS_8G, 
+    mfs=AK8963_BIT_16, 
+    mode=AK8963_MODE_C100HZ)
+
+mpu.configure() # Apply the settings to the registers.
+
 while(1):
 	# Read Keys ------------------------------------------------
 
 	key = readchar.readkey();
-
 	# Non-Kinetic Control Keys ----------------------------------
 
 	if(key == "e"):
@@ -60,6 +77,10 @@ while(1):
 		#print(key);
 
 		# Determine what to do based on the key input
+
+		mag = mpu.readMagnetometerMaster()
+		theta = math.atan2(mag[0]/mag[1])
+		print(theta)
 
 		# Numbered Keys
 		if(key == "1" or key == "9"):

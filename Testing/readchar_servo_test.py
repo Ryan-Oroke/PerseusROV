@@ -4,18 +4,18 @@ from adafruit_servokit import ServoKit
 ENABLED = False;
 
 ud_servo = 3;
-ud_throttle_step = 5;
+ud_throttle_step = 10;
 ud_throttle = 0;
 ud_throttle_max = 170;
 ud_throttle_min = 0;
 
 lm_servo = 1;
 rm_servo = 2;
-fb_throttle_step = 3;
+fb_throttle_step = 8;
 fb_throttle = 0;
 turn_throttle = 0;
 turn_throttle_abs_max = 120;
-turn_throttle_step = 3;
+turn_throttle_step = 8;
 fb_throttle_min = 0;
 fb_throttle_max = 150;
 lm_throttle_max = 170;
